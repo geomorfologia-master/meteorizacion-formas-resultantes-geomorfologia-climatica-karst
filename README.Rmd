@@ -8,7 +8,7 @@ output:
   #   fig_caption: yes
   bookdown::html_document2:
     number_sections: false
-    code_folding: hide
+    code_folding: show
     fig_caption: yes
     md_extensions: "-fancy_lists"
     toc: true
