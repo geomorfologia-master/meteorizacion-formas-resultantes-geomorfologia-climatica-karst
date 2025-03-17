@@ -91,6 +91,7 @@ Como indicador indirecto del potencial erosivo, utiliza los datos de muestras de
 Para que puedas visualizar las posiciones de las muestras, descarga el archivo KML `data/clastos-posiciones-muestras.kml`, el cual contiene los puntos de muestras. Cárgalo en QGIS o en GoogleEarth. Dado que la densidad de puntos por unidad de área puede ser muy grande en determinadas zonas, debes acercarte mucho para visualizar tus puntos asignados.
 
 Redacta, en un máximo de cuatro párrafos, lo siguiente:
+
 - Introducción, en el que podrías incluir importancia del ejercicio, objetivo, justificación.
 - Materiales y métodos, donde resumas que materiales usaste (esto incluye hasta el teléfono móvil, papel, lápiz, etc.), y las técnicas específicas empleadas, que en tu caso son la distancia y el método de agrupamiento enseñado.
 - Resultado, lo cual supone describir, fríamente, lo que obtuviste.

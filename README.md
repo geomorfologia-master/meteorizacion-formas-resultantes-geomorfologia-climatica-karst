@@ -84,15 +84,17 @@ densidad de puntos por unidad de área puede ser muy grande en
 determinadas zonas, debes acercarte mucho para visualizar tus puntos
 asignados.
 
-Redacta, en un máximo de cuatro párrafos, lo siguiente: - Introducción,
-en el que podrías incluir importancia del ejercicio, objetivo,
-justificación. - Materiales y métodos, donde resumas que materiales
-usaste (esto incluye hasta el teléfono móvil, papel, lápiz, etc.), y las
-técnicas específicas empleadas, que en tu caso son la distancia y el
-método de agrupamiento enseñado. - Resultado, lo cual supone describir,
-fríamente, lo que obtuviste. - Discusión, donde indiques si alcanzaste
-el objetivo, interpretes el resultado, indiques las limitaciones y los
-posibles trabajos futuros.
+Redacta, en un máximo de cuatro párrafos, lo siguiente:
+
+- Introducción, en el que podrías incluir importancia del ejercicio,
+  objetivo, justificación.
+- Materiales y métodos, donde resumas que materiales usaste (esto
+  incluye hasta el teléfono móvil, papel, lápiz, etc.), y las técnicas
+  específicas empleadas, que en tu caso son la distancia y el método de
+  agrupamiento enseñado.
+- Resultado, lo cual supone describir, fríamente, lo que obtuviste.
+- Discusión, donde indiques si alcanzaste el objetivo, interpretes el
+  resultado, indiques las limitaciones y los posibles trabajos futuros.
 
 # EJERCICIO 3: Macroformas del karst
 
