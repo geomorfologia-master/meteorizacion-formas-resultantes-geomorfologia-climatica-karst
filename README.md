@@ -1,7 +1,6 @@
 Práctica de aula 4 (PA04). Meteorización/intemperización, formas
 resultantes, geomorfología climática, karst <small><br>Geomorfología
-(GEO-114)<br>Universidad Autónoma de Santo Domingo (UASD)<br>Semestre
-2025-01</small>
+(GEO-114)<br>Universidad Autónoma de Santo Domingo (UASD)</small>
 ================
 El Tali
 2025-10-06
