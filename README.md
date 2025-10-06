@@ -12,7 +12,7 @@ Versión HTML (quizá más legible),
 # Fecha/hora de entrega
 
 **[VER PORTAL DE LA
-ASIGNATURA](https://github.com/geomorfologia-202501)**
+ASIGNATURA](https://github.com/geomorfologia-202502)**
 
 # Práctica de aula 4 (PA04). Meteorización/intemperización, formas resultantes, geomorfología climática, karst
 
