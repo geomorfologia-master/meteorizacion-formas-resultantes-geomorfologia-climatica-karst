@@ -4,7 +4,7 @@ resultantes, geomorfología climática, karst <small><br>Geomorfología
 2025-01</small>
 ================
 El Tali
-2025-03-17
+2025-10-06
 
 Versión HTML (quizá más legible),
 [aquí](https://geomorfologia-master.github.io/meteorizacion-formas-resultantes-geomorfologia-climatica-karst/README.html)
@@ -23,15 +23,24 @@ y el libro de texto de la asignatura, Anderson & Anderson (2010).
 
 # EJERCICIO 1: Tasa de denudación
 
+## Pasos
+
 Cálcula la tasa de denudación anual y la denudación al cabo de 30 años,
 de tu cuenca elegida (elige una de las siguientes y anúnciala en el
 foro):
 
 ``` r
-# cuenca  tamaño (km cuad.)  densidad rocas (g por cm cúbicos)  tasa transporte sed (kg/año)
-# 1             478.71                               2.69                103,435,298.45
-# 2             532.13                               2.45                148,569,784.32
-# 3             296.46                               3.02                 87,489,625.26
+# cuenca  tamaño (km²)  densidad rocas (g/cm³)  tasa transporte sed (kg/año)
+# 1       478.71        2.69                   103,435,298.45
+# 2       532.13        2.45                   148,569,784.32
+# 3       296.46        3.02                    87,489,625.26
+# 4       615.84        2.72                   165,238,942.11
+# 5       254.39        2.58                    72,951,384.57
+# 6       802.16        2.41                   214,780,995.63
+# 7       129.74        3.05                    39,114,327.48
+# 8       420.28        2.83                   112,697,559.92
+# 9       937.52        2.48                   245,116,037.76
+# 10      358.67        2.95                    94,826,403.09
 ```
 
 Realiza tu cálculo utilizando la fórmula de la tasa de denudación
@@ -42,6 +51,8 @@ Realiza tu cálculo utilizando la fórmula de la tasa de denudación
 donde *TTS* es la tasa de transporte de sedimentos, *A* es el área de la
 cuenca y *ρ* es la densidad promedio de las rocas de la cuenca.
 
+## Mandato
+
 Redacta, en un máximo de un párrafo, lo siguiente: interpreta tu
 resultado comparando con otros casos o respondiendo a preguntas tales
 como “Si la *TTS*, *A* o *ρ* fuesen menores o mayores, ¿sería mayor o
@@ -51,73 +62,193 @@ IMPORTANTE: no olvides transformar las unidades a un sistema común.
 
 # EJERCICIO 2: Tamaños de clastos de tipos de rocas comunes en distintos tramos de río
 
-``` r
-# conjunto            codigo_lugar
-# 1                   GJRC_02 y LPRO_03
-# 2                   RBAH_01 y LPRO_01
-# 3                   AVAV_01 y LPRO_02
-```
+## Pasos
 
 Como indicador indirecto del potencial erosivo, utiliza los datos de
 muestras de clastos tomadas en la cuenca del río Ocoa, que se encuentran
-alojados en `data/clastos-longitudes-identificacion.csv`. Compararás el
-tamaño de los clastos de los tipos de rocas que sean comunes en tu
-conjunto elegido (al elegir, anúncialo en el foro) entre las dos
-muestras (filtra según el campo `codigo_lugar`). Cada muestra contiene,
-aproximadamente, 100 clastos de distintos tipos de litologías medidos en
-tres ejes: largo, ancho y espesor. Una de tus muestras representa el
-tramo alto del río, la otra el tramo bajo; en el próximo párrafo te
-indico cómo cargar la posición de los puntos de muestras. Compara si los
-tamaños en el eje de anchura (campo `ancho_en_mm`) difieren
-significativamente entre la muestra de tramo alto y la de tramo bajo.
-Para ello, primero determina cuántos clastos de cada roca hay por cada
-muestra, luego obtén la media de la anchura, y evalúa dónde dicha media
-es mayor o menor, si en la muestra de tramo alto o en la de tramo bajo.
-Utiliza una prueba estadística para determinar si se trata de una
-diferencia significativa (eso de la significancia, ¿qué es? ¿sirve para
-algo aún?) Interpreta el resultado.
+alojados en `data/clastos-longitudes-identificacion.csv`. Organicé
+varios pares de muestras identificadas con códigos alfanuméricos para
+que elijas uno (elige y anúncialo en el foro):
 
-Para que puedas visualizar las posiciones de las muestras, descarga el
-archivo KML `data/clastos-posiciones-muestras.kml`, el cual contiene los
-puntos de muestras. Cárgalo en QGIS o en GoogleEarth. Dado que la
-densidad de puntos por unidad de área puede ser muy grande en
-determinadas zonas, debes acercarte mucho para visualizar tus puntos
-asignados.
+``` r
+# par            codigo_lugar
+# 1                   GJRC_02 y LPRO_03
+# 2                   RBAH_01 y LPRO_01
+# 3                   AVAV_01 y LPRO_02
+# 4                   LLRO_01 y LRRO_01
+# 5                   EJAP_01 y LPRO_03
+# 6                   RBAT_01 y LRRO_01
+```
+
+Cada muestra contiene, aproximadamente, 100 clastos de distintos tipos
+de litologías medidos en tres ejes: largo, ancho y espesor. En cada par,
+una las muestras representa el tramo alto del río, la otra el tramo
+bajo.
+
+Sigue este procedimiento para procesar los datos:
+
+- Para que puedas visualizar las posiciones de las muestras, descarga el
+  archivo KML `data/clastos-posiciones-muestras.kml`, el cual contiene
+  puntos de muestras (el archivo incluye todos los puntos de muestra
+  usados en un estudio sobre granulometría en el río Ocoa, no sólo los
+  tuyos). Carga el archivo KML en QGIS o en GoogleEarth. Acerca el mapa
+  para visualizar tus puntos asignados. Identifica cuál es la muestra de
+  tramo alto y cuál es la de tramo bajo.
+
+- Analiza el tamaño de los clastos, tanto de forma global como por tipo
+  de roca que sean comunes en tu par elegido entre las dos muestras
+  (filtra según el campo `codigo_lugar`). ¿Cómo analizar? Sigue leyendo.
+
+- Usando el eje de anchura (campo `ancho_en_mm`), compara si los tamaños
+  difieren significativamente entre la muestra de tramo alto y la de
+  tramo bajo de forma global. Para ello, primero obtén la media o la
+  mediana de la anchura en cada una de las dos muestras, y evalúa dónde
+  dicha media es mayor o menor, si en la muestra de tramo alto o en la
+  de tramo bajo.
+
+- Grafica el resultado usando un diagrama de cajas, indicando claramente
+  cuál es la de tramo alto y cuál es la de tramo bajo.
+
+- Utiliza una prueba estadística, como la t de Student (paramétrica) o
+  la prueba de la suma de rangos de Wilcoxon (no paramétrica), para
+  determinar si se trata de una diferencia significativa. Para esto
+  tendrás que usar todos los valores, no la media o la mediana.
+  Interpreta el resultado mentalmente y anótalo en algún lugar.
+
+- Compara si los tamaños en el eje de anchura (campo `ancho_en_mm`)
+  difieren significativamente entre la muestra de tramo alto y la de
+  tramo bajo, **pero esta vez por cada tipo de roca**. Para ello,
+  primero obtén la media o la mediana de la anchura en cada una de las
+  dos muestras para cada tipo de roca, y evalúa dónde dicha media es
+  mayor o menor por tipo de roca, si en la muestra de tramo alto o en la
+  de tramo bajo.
+
+- Grafica el resultado usando diagramas de cajas, uno por cada tipo de
+  roca, indicando claramente cuál es la de tramo alto y cuál es la de
+  tramo bajo.
+
+- Utiliza una prueba estadística, como la t de Student o la prueba de la
+  suma de rangos de Wilcoxon, para determinar si existe diferencia
+  significativa en el tamaño de clastos según tipo de roca. Para esto
+  tendrás que usar todos los valores de cada tipo de roca, no la media.
+  Interpreta el resultado mentalmente.
+
+## Mandato
 
 Redacta, en un máximo de cuatro párrafos, lo siguiente:
 
 - Introducción, en el que podrías incluir importancia del ejercicio,
   objetivo, justificación.
-- Materiales y métodos, donde resumas que materiales usaste (esto
-  incluye hasta el teléfono móvil, papel, lápiz, etc.), y las técnicas
-  específicas empleadas, que en tu caso son la distancia y el método de
-  agrupamiento enseñado.
+
+- Materiales y métodos, donde resumas que materiales usaste, y las
+  técnicas específicas empleadas.
+
 - Resultado, lo cual supone describir, fríamente, lo que obtuviste.
+
 - Discusión, donde indiques si alcanzaste el objetivo, interpretes el
   resultado, indiques las limitaciones y los posibles trabajos futuros.
 
+> Nota. Recuerda que si se lo pides a una IA debes saber lo que estás
+> haciendo, porque tendrás que exponer tu trabajo.
+
 # EJERCICIO 3: Macroformas del karst
 
-Elige una macroforma elevada, una deprimida y una aplanada de cualquiera
-de los morfosistema kársticos (puedes mezclar entre ellos, por ejemplo,
-una elevada de Los Haitises, una deprimida de Jaragua, y una aplanada de
-la sierra de Bahoruco), y realiza lo siguiente:
+## Pasos
 
-- Documéntate sobre la litología y la evolución en la cartografía
-  geológica y geomorfológica de RD, así como en otras fuentes que
-  encuentres sobre ellas.
-- Realiza un análisis morfométrico de cada una.
-- Redacta, en un máximo de cuatro párrafos, lo siguiente:
-  - Introducción, en el que podrías incluir importancia del ejercicio,
-    objetivo, justificación.
-  - Materiales y métodos, donde resumas que materiales usaste (esto
-    incluye hasta el teléfono móvil, papel, lápiz, etc.), y las técnicas
-    específicas empleadas, que en tu caso son la distancia y el método
-    de agrupamiento enseñado.
-  - Resultado, lo cual supone describir, fríamente, lo que obtuviste.
-  - Discusión, donde indiques si alcanzaste el objetivo, interpretes el
-    resultado, indiques las limitaciones y los posibles trabajos
-    futuros.
+Elige una macroforma elevada, una deprimida y una aplanada de cualquiera
+de los morfosistemas kársticos (puedes mezclar entre ellos, por ejemplo,
+una elevada de Los Haitises, una deprimida de Jaragua, y una aplanada de
+la sierra de Bahoruco).
+
+Documéntate sobre la litología y la evolución en la cartografía
+geológica y geomorfológica de RD, así como en otras fuentes que
+encuentres sobre ellas. Puedes encontrar estas fuentes en la página del
+Servicio Geológico Nacional (SGN) o en el Drive de recursos de la
+asignatura.
+
+Analiza ambas macroformas elegidas en términos morfométricos y
+evolutivos. Conserva lo que redactes.
+
+## Mandato
+
+Redacta, en un máximo de cuatro párrafos, lo siguiente:
+
+- Introducción, en el que podrías incluir importancia del ejercicio,
+  objetivo, justificación.
+
+- Materiales y métodos, donde resumas que materiales usaste y las
+  técnicas específicas empleadas.
+
+- Resultado, lo cual supone describir, fríamente, lo que obtuviste.
+
+- Discusión, donde indiques si alcanzaste el objetivo, interpretes el
+  resultado, indiques las limitaciones y los posibles trabajos futuros.
+
+> Nota. Recuerda que si se lo pides a una IA debes saber lo que estás
+> haciendo, porque tendrás que exponer tu trabajo.
+
+# EJERCICIO 4: Pendiente en vertientes de distintos tipos de rocas
+
+## Pasos
+
+- Descarga una tesela del DEM SRTM, resolución 90-m. Asegúrate de que la
+  tesela que descargues incluya al menos dos áreas con tipología de
+  rocas distintas (por ejemplo, un área con basalto y otra área con
+  caliza). Para ver las áreas de distinta litología, necesitarás el mapa
+  geológico en formato vectorial (para simplificar, usarás el mapa
+  escala 1:250,000). Lo puedes encontrar en el Drive de recursos de la
+  asignatura, en formato GeoPackage, carpeta
+  `geo250k-vectorial-geopackage`. El campo que contiene el tipo de
+  litología es `DLO`. Puedes simbolizar el mapa geológico para ver las
+  distintas litologías usando los archivos de estilo QML; hay uno para
+  colores de litologías y otro para tramas de litologías.
+
+- Calcula la pendiente de la tesela de DEM descargada. Para esto puedes
+  usar `r.slope.aspect` de GRASS GIS.
+
+- Elige un clasificador del relieve. Puedes usar el de GRASS GIS
+  (`r.geomorphons`) o el de WhiteBox Tools (`Geomorphons`). Una vez lo
+  hayas elegido, clasifica el DEM; obtendrás 10 clases de morfologías,
+  el resultado típico del algoritmo *Geomorphons*, de Jasiewicz y
+  colaboradores (2013).
+
+- Convierte de ráster a vectorial los geomórfonos,s y extrae los
+  polígonos de vertientes (clase 6, slope).
+
+- Selecciona 1 polígono de vertiente que ocurra en uno de los tipos de
+  rocas elegido y otro que ocurra en la otra elegida. Verifica que cada
+  polígono sea lo suficientemente grande como para que haya al menos 30
+  valores. Polígonos de tamaño 250,000 $m^2$ (aproximado) son los
+  ideales; si es más grande de ahí (pero excesivamente), estará bien.
+  Intenta que ambos polígonos (el de una roca y el de la otra) sean de
+  tamaños parecidos.
+
+- Extrae todos los valores de pendiente de cada polígono. Construirás
+  dos vectores de valores de pendientes, uno para cada uno de los
+  polígonos.
+
+- Usando la prueba t de Student (paramétrica), o la prueba de la suma de
+  rangos de Wilcoxon (no paramétrica), compara la pendiente de la
+  vertiente de un tipo de roca con la pendiente de la vertiente del otro
+  tipo de roca. ¿Son significativamente distintas?
+
+## Mandato
+
+Redacta, en un máximo de cuatro párrafos, lo siguiente:
+
+- Introducción, en el que podrías incluir importancia del ejercicio,
+  objetivo, justificación.
+
+- Materiales y métodos, donde resumas que materiales usaste y las
+  técnicas específicas empleadas.
+
+- Resultado, lo cual supone describir, fríamente, lo que obtuviste.
+
+- Discusión, donde indiques si alcanzaste el objetivo, interpretes el
+  resultado, indiques las limitaciones y los posibles trabajos futuros.
+
+> Nota. Recuerda que si se lo pides a una IA debes saber lo que estás
+> haciendo, porque tendrás que exponer tu trabajo.
 
 # Referencias
 
